@@ -1,0 +1,1 @@
+O projeto a seguir desenvolve um sistema de transações em memória, proposto [nesse repositório](https://github.com/rafaellins-itau/desafio-itau-vaga-99-junior?tab=readme-ov-file#223-calcular-estat%C3%ADsticas-get-estatistica).

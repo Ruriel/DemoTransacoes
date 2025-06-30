@@ -1,4 +1,4 @@
-package br.itau.unibanco.example.transacoes.DemoTransacoes.domain;
+package br.itau.unibanco.example.transacoes.DemoTransacoes.domain.entities;
 
 import br.itau.unibanco.example.transacoes.DemoTransacoes.api.exceptions.TransacaoInvalidaException;
 import lombok.Getter;
@@ -30,5 +30,9 @@ public class Transacao {
         this.id = UUID.randomUUID();
         this.valor = valor;
         this.dataHora = dataHora;
+    }
+
+    public Boolean isInRange(LocalDateTime min, LocalDateTime max){
+        return this.dataHora.isAfter(min) && (this.dataHora.isBefore(max) || this.dataHora.isEqual(max));
     }
 }

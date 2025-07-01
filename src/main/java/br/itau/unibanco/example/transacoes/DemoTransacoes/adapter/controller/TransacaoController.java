@@ -17,9 +17,7 @@ public class TransacaoController {
 
     @PostMapping("/transacao")
     public ResponseEntity<?> salvar(@RequestBody TransacaoInputDto transacaoInputDto){
-        var valorText = transacaoInputDto.getValor();
-        var dataHora = transacaoInputDto.getDataHora();
-        var transacaoOutputDto = salvarTransacaoUseCase.executar(valorText, dataHora);
+        var transacaoOutputDto = salvarTransacaoUseCase.executar(transacaoInputDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(transacaoOutputDto);
     }
 }

@@ -1,12 +1,12 @@
-package br.itau.unibanco.example.transacoes.DemoTransacoes.domain.entities;
+package br.itau.unibanco.example.transacoes.DemoTransacoes.domain.model;
 
-import br.itau.unibanco.example.transacoes.DemoTransacoes.api.exceptions.TransacaoInvalidaException;
+import br.itau.unibanco.example.transacoes.DemoTransacoes.application.exceptions.TransacaoInvalidaException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Getter
@@ -15,10 +15,10 @@ import java.util.UUID;
 public class Transacao {
     private UUID id;
     private BigDecimal valor;
-    private LocalDateTime dataHora;
+    private OffsetDateTime dataHora;
 
-    public Transacao(BigDecimal valor, LocalDateTime dataHora){
-        var now = LocalDateTime.now();
+    public Transacao(BigDecimal valor, OffsetDateTime dataHora){
+        var now = OffsetDateTime.now();
         if(dataHora.isAfter(now)) {
             log.error("A Transação requisitada aconteceu no futuro. DataHora = {}", dataHora);
             throw new TransacaoInvalidaException();
@@ -27,12 +27,11 @@ public class Transacao {
             log.error("A Transação requisitada possui valor negativo. Valor = {}", valor);
             throw new TransacaoInvalidaException();
         }
-        this.id = UUID.randomUUID();
         this.valor = valor;
         this.dataHora = dataHora;
     }
 
-    public Boolean isInRange(LocalDateTime min, LocalDateTime max){
+    public Boolean isInRange(OffsetDateTime min, OffsetDateTime max){
         return this.dataHora.isAfter(min) && (this.dataHora.isBefore(max) || this.dataHora.isEqual(max));
     }
 }

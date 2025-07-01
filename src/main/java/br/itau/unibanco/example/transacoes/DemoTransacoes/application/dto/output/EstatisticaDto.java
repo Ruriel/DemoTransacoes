@@ -1,6 +1,6 @@
-package br.itau.unibanco.example.transacoes.DemoTransacoes.api.dto;
+package br.itau.unibanco.example.transacoes.DemoTransacoes.application.dto.output;
 
-import br.itau.unibanco.example.transacoes.DemoTransacoes.domain.entities.Transacao;
+import br.itau.unibanco.example.transacoes.DemoTransacoes.domain.model.Transacao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,9 +32,10 @@ public class EstatisticaDto {
         this.mathContext = mathContext;
         this.count = transacoes.size();
         this.sum = BigDecimal.ZERO;
-        this.min = new BigDecimal(Double.MAX_VALUE);
+        this.min = BigDecimal.ZERO;
         this.max = BigDecimal.ZERO;
-        transacoes.stream().map(Transacao::getValor).forEach(valor -> {
+        transacoes.forEach(transacao -> {
+            var valor = transacao.getValor();
             this.sum = this.sum.add(valor);
             this.min = valor.min(this.min);
             this.max = valor.max(this.max);
@@ -42,6 +43,8 @@ public class EstatisticaDto {
     }
 
     public BigDecimal getAvg(){
+        if(this.count == 0)
+            return BigDecimal.ZERO;
         return this.sum.divide(BigDecimal.valueOf(this.count), this.mathContext);
     }
 }

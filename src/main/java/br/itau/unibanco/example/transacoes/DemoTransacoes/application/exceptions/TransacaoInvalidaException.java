@@ -1,4 +1,4 @@
-package br.itau.unibanco.example.transacoes.DemoTransacoes.api.exceptions;
+package br.itau.unibanco.example.transacoes.DemoTransacoes.application.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

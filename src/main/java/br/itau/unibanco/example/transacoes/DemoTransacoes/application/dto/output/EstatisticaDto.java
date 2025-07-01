@@ -37,8 +37,8 @@ public class EstatisticaDto {
         transacoes.forEach(transacao -> {
             var valor = transacao.getValor();
             this.sum = this.sum.add(valor);
-            this.min = valor.min(this.min);
-            this.max = valor.max(this.max);
+            this.min = this.count == 1 ? valor : valor.min(this.min);
+            this.max = this.count == 1 ? valor : valor.max(this.max);
         });
     }
 

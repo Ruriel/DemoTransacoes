@@ -5,7 +5,7 @@ O projeto a seguir desenvolve um sistema de transações em memória, proposto [
 
 - [x] GET /estatistica
 
-- [ ] DELETE /transacao
+- [x] DELETE /transacao
 
 - [ ] Testes automatizados
 

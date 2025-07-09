@@ -1,5 +1,6 @@
 package br.itau.unibanco.example.transacoes.DemoTransacoes.adapter.repository;
 
+import br.itau.unibanco.example.transacoes.DemoTransacoes.domain.model.Estatistica;
 import br.itau.unibanco.example.transacoes.DemoTransacoes.domain.model.Transacao;
 import br.itau.unibanco.example.transacoes.DemoTransacoes.domain.repository.TransacaoRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -48,5 +49,11 @@ public class TransacaoInMemoryRepository implements TransacaoRepository {
         var min = max.minusSeconds(tempoEmSegundos);
         var transacoes = this.transacaoMap.values();
         return transacoes.stream().filter(transacao -> transacao.isInRange(min, max)).toList();
+    }
+
+    @Override
+    public Estatistica buscarEstatisticaPorIntervaloEmSegundos(Integer tempoEmSegundos) {
+        var transacoes = buscarPorIntervaloEmSegundos(tempoEmSegundos);
+        return new Estatistica(transacoes);
     }
 }

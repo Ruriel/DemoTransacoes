@@ -1,6 +1,5 @@
 package br.itau.unibanco.example.transacoes.DemoTransacoes.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,8 +34,8 @@ public class Estatistica {
         transacoes.forEach(transacao -> {
             var valor = transacao.getValor();
             this.sum = this.sum.add(valor);
-            this.min = this.count == 1 ? valor : valor.min(this.min);
-            this.max = this.count == 1 ? valor : valor.max(this.max);
+            this.min = this.min.compareTo(BigDecimal.ZERO) == 0 ? valor : valor.min(this.min);
+            this.max = this.max.compareTo(BigDecimal.ZERO) == 0 ? valor : valor.max(this.max);
         });
     }
 

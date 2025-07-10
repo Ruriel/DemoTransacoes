@@ -29,13 +29,13 @@ public class Estatistica {
         this.mathContext = mathContext;
         this.count = transacoes.size();
         this.sum = BigDecimal.ZERO;
-        this.min = BigDecimal.ZERO;
-        this.max = BigDecimal.ZERO;
+        this.min = this.count == 0 ? BigDecimal.ZERO : transacoes.getFirst().getValor();
+        this.max = this.count == 0 ? BigDecimal.ZERO : transacoes.getFirst().getValor();
         transacoes.forEach(transacao -> {
             var valor = transacao.getValor();
             this.sum = this.sum.add(valor);
-            this.min = this.min.compareTo(BigDecimal.ZERO) == 0 ? valor : valor.min(this.min);
-            this.max = this.max.compareTo(BigDecimal.ZERO) == 0 ? valor : valor.max(this.max);
+            this.min = valor.min(this.min);
+            this.max = valor.max(this.max);
         });
     }
 

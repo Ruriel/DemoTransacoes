@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Getter
@@ -19,14 +19,7 @@ public class Estatistica {
 
     private BigDecimal max;
 
-    private MathContext mathContext;
-
     public Estatistica(List<Transacao> transacoes){
-        this(transacoes, new MathContext(2));
-    }
-
-    public Estatistica(List<Transacao> transacoes, MathContext mathContext){
-        this.mathContext = mathContext;
         this.count = transacoes.size();
         this.sum = BigDecimal.ZERO;
         this.min = this.count == 0 ? BigDecimal.ZERO : transacoes.getFirst().getValor();
@@ -42,6 +35,6 @@ public class Estatistica {
     public BigDecimal getAvg(){
         if(this.count == 0)
             return BigDecimal.ZERO;
-        return this.sum.divide(BigDecimal.valueOf(this.count), this.mathContext);
+        return this.sum.divide(BigDecimal.valueOf(this.count), RoundingMode.HALF_DOWN);
     }
 }

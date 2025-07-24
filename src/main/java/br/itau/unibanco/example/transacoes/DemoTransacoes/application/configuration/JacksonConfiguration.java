@@ -13,6 +13,7 @@ public class JacksonConfiguration {
     public Jackson2ObjectMapperBuilderCustomizer offsetDateTimeCustomizer() {
         return builder -> builder
                 .featuresToDisable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+                .modulesToInstall(new JavaTimeModule())
                 .modules(new JavaTimeModule());
     }
 }

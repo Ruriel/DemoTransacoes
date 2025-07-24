@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class SalvarTransacaoUseCase {
     private final TransacaoRepository transacaoRepository;
     public TransacaoOutputDto executar(TransacaoInputDto transacaoInputDto){
-        var valorText = transacaoInputDto.getValor();
+        var valorText = transacaoInputDto.getValor().replace(',', '.');
         var dataHora = transacaoInputDto.getDataHora();
         var valor = new BigDecimal(valorText);
         var transacao = new Transacao(valor, dataHora);
